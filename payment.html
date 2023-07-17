@@ -43,7 +43,7 @@
                 .then(response => response.json())
                 .then(data => {
                     var bitcoinPrice = data.bpi.USD.rate_float;
-                    var equivalentAmount = (150 / bitcoinPrice).toFixed(6); // Calculate the equivalent Bitcoin amount for $110
+                    var equivalentAmount = (60 / bitcoinPrice).toFixed(6); // Calculate the equivalent Bitcoin amount for $60
                     document.getElementById("bitcoinPrice").textContent = equivalentAmount;
                 })
                 .catch(error => {
